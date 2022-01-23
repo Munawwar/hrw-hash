@@ -1,0 +1,57 @@
+{
+  "name": "hrw-hash",
+  "version": "0.0.1",
+  "description": "Highest random weight hashing / rendezvous hashing",
+  "type": "module",
+  "module": "./src/main.js",
+  "main": "./dist/main.cjs",
+  "unpkg": "./dist/main.umd.js",
+  "exports": {
+    "require": "./dist/main.cjs",
+    "default": "./src/main.js"
+  },
+  "source": "src/main.js",
+  "types": "src/main.d.ts",
+  "engines": {
+    "node": ">= 12.0.0"
+  },
+  "scripts": {
+    "lint": "xo src/main.js",
+    "lint-fix": "xo --fix src/main.js",
+    "types": "tsc -p .config/jsconfig.json",
+    "build": "npm run build:non-min && npm run build:min && npm run build:typings",
+    "build:non-min": "npx rollup --config .config/rollup.non-min.config.js",
+    "build:min": "npx rollup --config .config/rollup.min.config.js",
+    "build:typings": "tsc -p .config/tsconfig.json",
+    "clean": "npm run clean:builds && npm run clean:typings",
+    "clean:builds": "npx rimraf dist/",
+    "clean:typings": "npx rimraf src/**/*.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Munawwar/hrw-hash.git"
+  },
+  "keywords": [
+    "hrw",
+    "rendezvous",
+    "consistent",
+    "hashing",
+    "hash"
+  ],
+  "author": "Munawwar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Munawwar/hrw-hash/issues"
+  },
+  "homepage": "https://github.com/Munawwar/hrw-hash#readme",
+  "devDependencies": {
+    "typescript": "^4.5.5",
+    "xo": "^0.47.0"
+  },
+  "xo": {
+    "rules": {
+      "unicorn/prefer-code-point": 0,
+      "no-bitwise": 0
+    }
+	}
+}
