@@ -1,4 +1,12 @@
 /**
+ * 32-bit FNV-1a hash algorithm taken from https://github.com/sindresorhus/fnv1a
+ */
+export function fnv1a32(string: any): bigint;
+/**
+ * Mulberry32 seeded PRNG algorithm taken from https://github.com/sadeqush/Shuffle-Deshuffle-Array
+ */
+export function mulberry32(seed: any): number;
+/**
  * Hash function algorithm: mulberry32(fnv1a(string))
  * 32-bit FNV-1a hash algorithm taken from https://github.com/sindresorhus/fnv1a
  * Mulberry32 seeded PRNG algorithm taken from https://github.com/sadeqush/Shuffle-Deshuffle-Array

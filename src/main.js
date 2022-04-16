@@ -1,11 +1,8 @@
+/* eslint-disable no-mixed-operators */
 /**
- * Hash function algorithm: mulberry32(fnv1a(string))
  * 32-bit FNV-1a hash algorithm taken from https://github.com/sindresorhus/fnv1a
- * Mulberry32 seeded PRNG algorithm taken from https://github.com/sadeqush/Shuffle-Deshuffle-Array
- * @param {string} string
- * @returns {number} between 0 and 2^32
  */
-export function hashFunc(string) {
+export function fnv1a32(string) {
 	// FNV-1a hashing
 	let hash = 2_166_136_261n;
 	const fnvPrime = 16_777_619n;
@@ -26,17 +23,38 @@ export function hashFunc(string) {
 		hash ^= BigInt(characterCode);
 		hash = BigInt.asUintN(32, hash * fnvPrime);
 	}
-	
-	// a seeded pseudorandom number generator gives more uniform distribution
-  // on consecutive serial strings (e.g. 'img-1', 'img-2', 'img-3'...) than
-	// using fnv1a hash alone.
-	
+
+	return hash;
+}
+
+/**
+ * Mulberry32 seeded PRNG algorithm taken from https://github.com/sadeqush/Shuffle-Deshuffle-Array
+ */
+export function mulberry32(seed) {
 	// Mulberry32 PRNG
-	let t = Number(hash) + 0x6D2B79F5;
+	let t = Number(seed) + 0x6D_2B_79_F5;
 	t = Math.imul(t ^ t >>> 15, t | 1);
 	t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-	// unlike original Mulberry32 function, we dont need to divide by 2^32
+	// Unlike original Mulberry32 function, we dont need to divide by 2^32
 	return (t ^ t >>> 14) >>> 0;
+}
+
+/**
+ * Hash function algorithm: mulberry32(fnv1a(string))
+ * 32-bit FNV-1a hash algorithm taken from https://github.com/sindresorhus/fnv1a
+ * Mulberry32 seeded PRNG algorithm taken from https://github.com/sadeqush/Shuffle-Deshuffle-Array
+ * @param {string} string
+ * @returns {number} between 0 and 2^32
+ */
+export function hashFunc(string) {
+	const hash = fnv1a32(string);
+
+	// A seeded pseudorandom number generator gives more uniform distribution
+	// on consecutive serial strings (e.g. 'img-1', 'img-2', 'img-3'...) than
+	// using fnv1a hash alone.
+
+	// Mulberry32 PRNG
+	return mulberry32(hash);
 }
 
 /**
@@ -48,8 +66,8 @@ export function hashFunc(string) {
 export function hrwHash(key, destinations) {
 	return destinations
 		.map(destination => ({
-				d: destination,
-				w: hashFunc(String(key) + destination), // Weight
+			d: destination,
+			w: hashFunc(String(key) + destination), // Weight
 		}))
 		.sort((a, b) => b.w - a.w)
 		.map(item => item.d);
