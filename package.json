@@ -1,6 +1,6 @@
 {
   "name": "hrw-hash",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Highest random weight hashing / rendezvous hashing",
   "type": "module",
   "module": "./src/main.js",

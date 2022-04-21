@@ -2,6 +2,7 @@ import test from 'ava';
 import {fnv1a32, mulberry32, hashFunc, hrwHash} from './src/main.js';
 
 test('fnv1a32', t => {
+	t.is(fnv1a32(''), 2_166_136_261n);
 	t.is(fnv1a32('hello world'), 3_582_672_807n);
 	// Verify Unicode handling against values from https://www.tools4noobs.com/online_tools/hash/
 	t.is(fnv1a32('🦄🌈'), 0xAA_F5_FE_E7n);

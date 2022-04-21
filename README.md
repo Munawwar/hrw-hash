@@ -21,10 +21,9 @@ Advantage of this hashing over other sticky load balancing algorithms is that:
 Disadvantage of this hashing method:
 1. Replacing a destination with another one will re-route keys unnecessarily as the algo is order insensitive
 
-This implementation uses bigint (so needs node.js >= 12), unescape and encodeURIComponent (so it supports cloudflare workers).
-It doesn't have any node.js specific dependencies and uses no 3rd party dependencies either.
+The implementation is small (0.5 kb minified) and with no 3rd party dependencies. It uses bigint, unescape and encodeURIComponent, so it supports modern browsers, node.js >= 12 and cloudflare workers.
 
-It uses `mulberry32(fnv1a32('key'))` as hash function internally for the random hash.
+It uses `mulberry32(fnv1a32('key'))` as hash function internally for the random hash. In my tests, this gives better distribution than fnv1a-32 alone and still keeps the implementation fast and small.
 
 
 ```js
