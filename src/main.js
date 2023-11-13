@@ -40,6 +40,16 @@ export function mulberry32(seed) {
 }
 
 /**
+ * SplitMix32 seeded PRNG algorithm taken from https://github.com/bryc/code/blob/master/jshash/PRNGs.md#splitmix32
+ */
+function splitmix32(a) {
+	let t = (Number(a) | 0) + 0x9e3779b9 | 0;
+	t = Math.imul(t ^ t >>> 16, 0x21f0aaad);
+	t = Math.imul(t ^ t >>> 15, 0x735a2d97);
+	return (t ^ t >>> 15) >>> 0;
+}
+
+/**
  * Hash function algorithm: mulberry32(fnv1a(string))
  * 32-bit FNV-1a hash algorithm taken from https://github.com/sindresorhus/fnv1a
  * Mulberry32 seeded PRNG algorithm taken from https://github.com/sadeqush/Shuffle-Deshuffle-Array
@@ -53,8 +63,9 @@ export function hashFunc(string) {
 	// on consecutive serial strings (e.g. 'img-1', 'img-2', 'img-3'...) than
 	// using fnv1a hash alone.
 
-	// Mulberry32 PRNG
-	return mulberry32(hash);
+	// Pass it through a seeded PRNG
+	// return mulberry32(hash);
+	return splitmix32(hash);
 }
 
 /**
