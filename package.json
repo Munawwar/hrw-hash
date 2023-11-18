@@ -1,6 +1,6 @@
 {
   "name": "hrw-hash",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Highest random weight hashing / rendezvous hashing",
   "type": "module",
   "module": "./src/main.js",
@@ -28,10 +28,7 @@
     "clean:typings": "npx rimraf src/**/*.d.ts",
     "test": "ava"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Munawwar/hrw-hash.git"
-  },
+  "repository": "https://github.com/Munawwar/hrw-hash",
   "keywords": [
     "hrw",
     "rendezvous",
