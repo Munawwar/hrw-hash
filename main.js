@@ -1,12 +1,8 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-/* eslint-disable no-mixed-operators */
+/* eslint-disable no-mixed-operators,unicorn/prevent-abbreviations */
 /**
  * 32-bit FNV-1a hash algorithm taken from https://github.com/sindresorhus/fnv1a
  */
-function fnv1a32(string) {
+export function fnv1a32(string) {
 	// FNV-1a hashing
 	let hash = 2_166_136_261n;
 	const fnvPrime = 16_777_619n;
@@ -34,7 +30,7 @@ function fnv1a32(string) {
 /**
  * Mulberry32 seeded PRNG algorithm taken from https://github.com/sadeqush/Shuffle-Deshuffle-Array
  */
-function mulberry32(seed) {
+export function mulberry32(seed) {
 	// Mulberry32 PRNG
 	let t = Number(seed) + 0x6D_2B_79_F5;
 	t = Math.imul(t ^ t >>> 15, t | 1);
@@ -50,7 +46,7 @@ function mulberry32(seed) {
  * @param {string} string
  * @returns {number} between 0 and 2^32
  */
-function hashFunc(string) {
+export function hashFunc(string) {
 	const hash = fnv1a32(string);
 
 	// A seeded pseudorandom number generator gives more uniform distribution
@@ -67,7 +63,7 @@ function hashFunc(string) {
  * @return {string[]} destinations sorted in highest to lowest preference
  * @throws {Error} When key is invalid
  */
-function hrwHash(key, destinations) {
+export function hrwHash(key, destinations) {
 	return destinations
 		.map(destination => ({
 			d: destination,
@@ -76,8 +72,3 @@ function hrwHash(key, destinations) {
 		.sort((a, b) => b.w - a.w)
 		.map(item => item.d);
 }
-
-exports.fnv1a32 = fnv1a32;
-exports.hashFunc = hashFunc;
-exports.hrwHash = hrwHash;
-exports.mulberry32 = mulberry32;

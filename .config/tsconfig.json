@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "module": "NodeNext",
     "allowJs": true,
     "checkJs": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "noEmitOnError": true
+    "noEmit": true
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "../src/main.js"
+    "../main.js"
   ]
 }

@@ -21,7 +21,7 @@ Advantage of this hashing over other sticky load balancing algorithms is that:
 Disadvantage of this hashing method:
 1. Replacing a destination with another one will re-route keys unnecessarily as the algo is order insensitive
 
-The implementation is small (0.5 kb minified) and with no 3rd party dependencies. It uses bigint, unescape and encodeURIComponent, so it supports modern browsers, node.js >= 12 and cloudflare workers.
+The implementation is small (0.5 kb minified) and with no 3rd party dependencies. It uses bigint, unescape and encodeURIComponent, so it supports modern browsers, node.js >= 12.5.0 and cloudflare workers.
 
 It uses `mulberry32(fnv1a32('key'))` as hash function internally for the random hash. In my tests, this gives better distribution than fnv1a-32 alone and still keeps the implementation fast and small.
 
@@ -31,3 +31,9 @@ It uses `mulberry32(fnv1a32('key'))` as hash function internally for the random 
 import { hashFunc } from 'hrw-hash'
 hashFunc('string') // returns positive integer < 2^32
 ```
+
+# Breaking Change V2
+
+- Removed minified dist files (dist/*.min.js). If you want minified build for browser, then use `import { hrwHash } from 'https://esm.sh/hrw-hash'`
+- Removed UMD build
+- Changed minimum node.js version requirement from >= v12.0.0 to >= 12.5.0

@@ -1,5 +1,7 @@
 import test from 'ava';
-import {fnv1a32, mulberry32, hashFunc, hrwHash} from './src/main.js';
+import {
+	fnv1a32, mulberry32, hashFunc, hrwHash,
+} from './main.js';
 
 test('fnv1a32', t => {
 	t.is(fnv1a32(''), 2_166_136_261n);

@@ -1,31 +1,26 @@
 {
   "name": "hrw-hash",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Highest random weight hashing / rendezvous hashing",
   "type": "module",
-  "module": "./src/main.js",
-  "main": "./dist/main.cjs",
-  "unpkg": "./dist/main.umd.js",
+  "module": "main.js",
+  "main": "main.cjs",
   "exports": {
-    "require": "./dist/main.cjs",
-    "default": "./src/main.js"
+    "require": "./main.cjs",
+    "default": "./main.js"
   },
-  "source": "src/main.js",
-  "types": "src/main.d.ts",
+  "types": "main.d.ts",
   "engines": {
-    "node": ">= 12.0.0"
+    "node": ">= 12.5.0"
   },
   "scripts": {
-    "lint": "xo src/main.js test.js",
-    "lint-fix": "xo --fix src/main.js test.js",
-    "types": "npx --package=typescript@^4.5.5 -- tsc -p .config/jsconfig.json",
-    "build": "npm run build:non-min && npm run build:min && npm run build:typings",
-    "build:non-min": "npx rollup --config .config/rollup.non-min.config.js",
-    "build:min": "npx rollup --config .config/rollup.min.config.js",
-    "build:typings": "npx --package=typescript@^4.5.5 -- tsc -p .config/tsconfig.json",
-    "clean": "npm run clean:builds && npm run clean:typings",
-    "clean:builds": "npx rimraf dist/",
-    "clean:typings": "npx rimraf src/**/*.d.ts",
+    "lint": "npx xo@^0.58.0 main.js test.js",
+    "lint-fix": "npx xo@^0.58.0 --fix main.js test.js",
+    "types": "npx --package=typescript@5.4.3 -- tsc -p .config/tsconfig.json",
+    "build": "npm run clean && npm run build:cjs && npm run build:typings",
+    "build:cjs": "npx rollup@^4.14.0 --config .config/rollup.config.js",
+    "build:typings": "npx --package=typescript@5.4.3 -- tsc -p .config/tsconfig-dts.json",
+    "clean": "npx rimraf main.cjs main.d.ts",
     "test": "ava"
   },
   "repository": "https://github.com/Munawwar/hrw-hash",
@@ -43,8 +38,7 @@
   },
   "homepage": "https://github.com/Munawwar/hrw-hash#readme",
   "devDependencies": {
-    "ava": "^4.2.0",
-    "xo": "^0.47.0"
+    "ava": "^6.1.2"
   },
   "xo": {
     "rules": {
