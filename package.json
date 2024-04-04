@@ -1,6 +1,6 @@
 {
   "name": "hrw-hash",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Highest random weight hashing / rendezvous hashing",
   "type": "module",
   "module": "./src/main.js",
@@ -18,11 +18,11 @@
   "scripts": {
     "lint": "xo src/main.js test.js",
     "lint-fix": "xo --fix src/main.js test.js",
-    "types": "tsc -p .config/jsconfig.json",
+    "types": "npx --package=typescript@^4.5.5 -- tsc -p .config/jsconfig.json",
     "build": "npm run build:non-min && npm run build:min && npm run build:typings",
     "build:non-min": "npx rollup --config .config/rollup.non-min.config.js",
     "build:min": "npx rollup --config .config/rollup.min.config.js",
-    "build:typings": "tsc -p .config/tsconfig.json",
+    "build:typings": "npx --package=typescript@^4.5.5 -- tsc -p .config/tsconfig.json",
     "clean": "npm run clean:builds && npm run clean:typings",
     "clean:builds": "npx rimraf dist/",
     "clean:typings": "npx rimraf src/**/*.d.ts",
@@ -44,7 +44,6 @@
   "homepage": "https://github.com/Munawwar/hrw-hash#readme",
   "devDependencies": {
     "ava": "^4.2.0",
-    "typescript": "^4.5.5",
     "xo": "^0.47.0"
   },
   "xo": {
