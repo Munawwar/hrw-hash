@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig-dts-esm.json",
+  "include": [
+    "../main.cjs"
+  ]
+}
