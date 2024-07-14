@@ -32,6 +32,10 @@ import { hashFunc } from 'hrw-hash'
 hashFunc('string') // returns positive integer < 2^32
 ```
 
+# Dev Test
+
+Test the types against https://arethetypeswrong.github.io
+
 # Breaking Change V2
 
 - Removed minified dist files (dist/*.min.js). If you want minified build for browser, then use `import { hrwHash } from 'https://esm.sh/hrw-hash'`
